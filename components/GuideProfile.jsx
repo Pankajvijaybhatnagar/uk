@@ -11,7 +11,7 @@ export default function GuideProfile() {
             </div>
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-gold/50 bg-maroon-dark px-6 py-2 shadow-gold">
               <p className="whitespace-nowrap font-display text-sm font-semibold tracking-wide text-gold-light">
-                Shri Krishan Kripa
+               Swami Shri Gyananand ji Maharaj
               </p>
             </div>
           </div>
@@ -25,12 +25,11 @@ export default function GuideProfile() {
           <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl">
             Under the Grace of
             <span className="block font-script text-5xl font-normal text-gold-light md:text-6xl">
-              Shri Krishan Kripa
+              Swami Shri Gyananand ji Maharaj
             </span>
           </h2>
           <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-cream/85 md:text-lg">
-            The festival is graced by the presence and blessings of Shri Krishan
-            Kripa, whose guidance has shaped GIEO Gita&rsquo;s mission of carrying
+            The festival is graced by the presence and blessings of Swami Shri Gyananand ji Maharaj, whose guidance has shaped GIEO Gita&rsquo;s mission of carrying
             the Bhagavad Gita&rsquo;s teachings to communities across the world.
           </p>
           <p className="mt-4 max-w-xl font-body text-base leading-relaxed text-cream/85 md:text-lg">
