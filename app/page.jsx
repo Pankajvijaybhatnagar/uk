@@ -17,7 +17,7 @@ export default function Home() {
         <About />
         <ProgramHighlights />
         <GuideProfile />
-        <Schedule />
+        {/* <Schedule /> */}
         <Venue />
         <Registration />
       </main>
