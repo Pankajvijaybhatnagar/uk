@@ -2,9 +2,9 @@ const FOOTER_LINKS = [
   { label: "About", href: "#about" },
   { label: "Program", href: "#program" },
   { label: "Guide", href: "#guide" },
-  { label: "Schedule", href: "#schedule" },
+  // { label: "Schedule", href: "#schedule" },
   { label: "Venue", href: "#venue" },
-  { label: "Register", href: "#register" },
+  { label: "Date", href: "#register" },
 ];
 
 export default function Footer() {
