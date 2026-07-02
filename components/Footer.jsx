@@ -64,14 +64,15 @@ export default function Footer() {
                   gieogita.org.uk
                 </a>
               </li>
-              <li>
+             
+                <li>
                 <a
-                  href="https://www.manchestergitafestival.com"
+                  href="/"
                   target="_blank"
                   rel="noreferrer"
                   className="font-body text-sm text-black hover:text-black"
                 >
-                  manchestergitafestival.com
+                 info@gieogita.org.uk
                 </a>
               </li>
               <li className="flex items-center gap-3 pt-1">
@@ -93,6 +94,7 @@ export default function Footer() {
                   aria-label="Instagram"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-black/20 transition-colors hover:border-gold hover:text-maroon"
                 >
+                  
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" strokeWidth="1.3" />
                     <circle cx="8" cy="8" r="2.6" stroke="currentColor" strokeWidth="1.3" />
