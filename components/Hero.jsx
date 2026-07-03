@@ -17,7 +17,7 @@ export default function Hero() {
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-cream-panel px-4 py-1.5 shadow-sm">
             <span className="font-devanagari text-sm text-maroon">ॐ</span>
             <span className="font-body text-xs font-medium uppercase tracking-[0.18em] text-maroon-dark">
-              Graced by Shri Krishan Kripa
+              Graced by Gita Manishi Swami Shri Gyananand ji Maharaj
             </span>
           </div>
 
