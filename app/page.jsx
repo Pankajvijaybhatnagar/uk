@@ -7,6 +7,7 @@ import Schedule from "@/components/Schedule";
 import Venue from "@/components/Venue";
 import Registration from "@/components/Registration";
 import Footer from "@/components/Footer";
+import EventGallery from "@/components/Events";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <About />
         <ProgramHighlights />
+        <EventGallery/>
         <GuideProfile />
         {/* <Schedule /> */}
         <Venue />
