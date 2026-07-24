@@ -37,7 +37,7 @@ export default function Schedule() {
       <div className="mx-auto max-w-5xl px-5 md:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-saffron">
-            25 – 29 August 2026
+            25 – 30 August 2026
           </p>
           <h2 className="mt-3 font-display text-4xl font-bold text-indigo-deep md:text-5xl">
             Five Days of the Festival

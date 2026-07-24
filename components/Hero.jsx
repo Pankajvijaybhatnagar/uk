@@ -47,7 +47,7 @@ export default function Hero() {
               </div>
               <div className="leading-tight">
                 <p className="font-body text-sm font-semibold text-indigo-deep">
-                  25 – 29 August 2026
+                  25 – 30 August 2026
                 </p>
                 <p className="font-body text-xs text-ink/60">Manchester, United Kingdom</p>
               </div>

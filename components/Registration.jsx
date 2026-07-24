@@ -7,7 +7,7 @@ export default function Registration() {
           Save the Date
         </p>
         <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-6xl">
-          25<sup className="text-2xl md:text-3xl">th</sup> — 29<sup className="text-2xl md:text-3xl">th</sup>{" "}
+          25<sup className="text-2xl md:text-3xl">th</sup> — 30<sup className="text-2xl md:text-3xl">th</sup>{" "}
           August 2026
         </h2>
         <p className="mx-auto mt-5 max-w-xl font-body text-base leading-relaxed text-cream/80 md:text-lg">

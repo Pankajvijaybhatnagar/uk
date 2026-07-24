@@ -34,7 +34,7 @@ const devanagari = Noto_Serif_Devanagari({
 export const metadata = {
   title: "Manchester Gita Festival 2026 | GIEO Gita",
   description:
-    "Manchester Gita Festival — August 25th to 29th, 2026. Spiritual wisdom, timeless values, global harmony. A five-day gathering of Satsang, Conference, Cultural Programs, and Devotional Gatherings, graced by Shri Krishan Kripa. Organised by GIEO Gita.",
+    "Manchester Gita Festival — August 25th to 30th, 2026. Spiritual wisdom, timeless values, global harmony. A five-day gathering of Satsang, Conference, Cultural Programs, and Devotional Gatherings, graced by Shri Krishan Kripa. Organised by GIEO Gita.",
   keywords: [
     "Manchester Gita Festival",
     "GIEO Gita",
