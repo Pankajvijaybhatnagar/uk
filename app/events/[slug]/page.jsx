@@ -2,6 +2,10 @@
 //
 // ONE page template shared by every event. Next.js calls this once per slug
 // (see generateStaticParams below) — only the data from lib/events-data.js changes.
+//
+// UPDATED: hero now expects a SQUARE creative image (e.g. 1080x1080) instead of
+// a wide banner. It's shown as a framed card next to the title/details rather
+// than stretched full-width behind text.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +35,7 @@ export function generateMetadata({ params }) {
       description: event.seoDescription || event.shortDesc,
       url,
       siteName: "Manchester Gita Festival",
-      images: [{ url: `${SITE_URL}${event.heroImage}`, width: 1200, height: 630 }],
+      images: [{ url: `${SITE_URL}${event.heroImage}`, width: 1080, height: 1080 }],
       type: "website",
     },
     twitter: {
@@ -79,38 +83,84 @@ export default function EventPage({ params }) {
       />
 
       <main className="bg-[rgb(244,229,201)]">
-        {/* ---------- HERO IMAGE ---------- */}
-        <section className="relative h-[52vh] min-h-[380px] w-full overflow-hidden md:h-[64vh]">
-          <Image
-            src={event.heroImage}
-            alt={event.name}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
+        {/* ---------- HERO ---------- */}
+        <section className="relative overflow-hidden">
+          {/* soft decorative backdrop so the section doesn't feel empty behind a small square image */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${event.color} opacity-90`} />
+          <div
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+            }}
           />
-          <div className={`absolute inset-0 bg-gradient-to-t ${event.color} opacity-50 mix-blend-multiply`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold/20 blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-maroon/30 blur-3xl" />
 
-          {/* Back link */}
-          <Link
-            href="/#events"
-            className="absolute left-5 top-6 z-10 inline-flex items-center gap-2 rounded-full bg-black/30 px-4 py-2 font-body text-sm text-cream backdrop-blur-sm transition-colors hover:bg-black/50 md:left-10 md:top-8"
-          >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Back to Festival
-          </Link>
+          <div className="relative mx-auto max-w-6xl px-5 py-10 md:px-10 md:py-16">
+            {/* Back link */}
+            <Link
+              href="/#events"
+              className="mb-8 inline-flex items-center gap-2 rounded-full bg-black/25 px-4 py-2 font-body text-sm text-cream backdrop-blur-sm transition-colors hover:bg-black/40"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Back to Festival
+            </Link>
 
-          {/* Title block */}
-          <div className="absolute inset-x-0 bottom-0 z-10 mx-auto max-w-5xl px-5 pb-10 md:px-10">
-            <p className="font-script text-2xl italic text-gold drop-shadow-sm md:text-3xl">
-              {event.tagline}
-            </p>
-            <h1 className="mt-2 font-display text-4xl font-bold text-cream drop-shadow-md md:text-6xl">
-              {event.name}
-            </h1>
+            <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[340px_1fr] md:gap-14">
+              {/* Square creative — framed card, never stretched */}
+              <div className="mx-auto w-full max-w-[340px] md:mx-0">
+                <div className="group relative aspect-square overflow-hidden rounded-3xl border-4 border-gold/70 bg-cream shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02]">
+                  <Image
+                    src={event.heroImage}
+                    alt={event.name}
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 80vw, 340px"
+                    className="object-cover"
+                  />
+                  {/* thin inner gold hairline for a "framed poster" feel */}
+                  <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/50" />
+                </div>
+              </div>
+
+              {/* Title block */}
+              <div className="text-center md:text-left">
+                <p className="font-script text-2xl italic text-gold drop-shadow-sm md:text-3xl">
+                  {event.tagline}
+                </p>
+                <h1 className="mt-2 font-display text-4xl font-bold text-gold drop-shadow-md md:text-6xl">
+                  {event.name}
+                </h1>
+
+                <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+                  <span className="rounded-full bg-black/25 px-4 py-1.5 font-body text-sm text-cream backdrop-blur-sm">
+                    {event.date}
+                  </span>
+                  <span className="rounded-full bg-black/25 px-4 py-1.5 font-body text-sm text-cream backdrop-blur-sm">
+                    {event.time}
+                  </span>
+                  <span className="rounded-full bg-black/25 px-4 py-1.5 font-body text-sm text-cream backdrop-blur-sm">
+                    {event.venue}
+                  </span>
+                </div>
+
+                <Link
+                  href={event.registrationLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-7 py-3 font-script text-lg italic tracking-wide text-cream shadow-lg transition-transform hover:scale-[1.03]"
+                >
+                  Register Now
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -146,7 +196,7 @@ export default function EventPage({ params }) {
                 </ul>
               </div>
 
-              {/* Gallery */}
+              {/* Gallery — square thumbnails to match the creative style */}
               {event.gallery?.length > 0 && (
                 <div className="mt-10">
                   <h2 className="font-display text-xl font-semibold text-indigo-deep">

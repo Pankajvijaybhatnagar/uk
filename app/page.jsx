@@ -12,7 +12,7 @@ import EventGallery from "@/components/Events";
 export default function Home() {
   return (
     <>
-      <Header />
+
       <main>
         <Hero />
         <About />
@@ -23,7 +23,7 @@ export default function Home() {
         <Venue />
         <Registration />
       </main>
-      <Footer />
+    
     </>
   );
 }

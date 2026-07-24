@@ -1,5 +1,7 @@
 import { Cormorant_Garamond, Poppins, Sacramento, Noto_Serif_Devanagari } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -51,7 +53,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${poppins.variable} ${sacramento.variable} ${devanagari.variable}`}>
+      <Header/>
       <body className="font-body antialiased">{children}</body>
+      <Footer/>
     </html>
   );
 }
