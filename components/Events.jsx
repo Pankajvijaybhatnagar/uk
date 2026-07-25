@@ -34,33 +34,39 @@ export default function EventGallery() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
           {EVENTS.map((event) => (
             <div
               key={event.slug}
               className="group relative flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-cream-panel shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-gold"
             >
               {/* Image */}
-              <div className="relative h-48 w-full overflow-hidden">
+              <div style={{ aspectRatio: "1/1" }} className="relative  w-full overflow-hidden">
+              <Link  href={`/events/${event.slug}`} >
+              
+              
+              
                 <Image
                   src={event.heroImage}
                   alt={event.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 25vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  
                 />
-                <div
+                </Link>
+                {/* <div
                   className={`absolute inset-0 bg-gradient-to-t ${event.color} opacity-60 mix-blend-multiply`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" /> */}
 
                 {/* Diya glow accent, top right */}
                 <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gold/20 blur-xl transition-transform duration-500 group-hover:scale-125" />
 
                 {/* Tagline overlay, cursive */}
-                <p className="absolute bottom-3 left-4 font-script text-lg italic text-gold/90 tracking-wide drop-shadow-sm">
+                {/* <p className="absolute bottom-3 left-4 font-script text-lg italic text-gold/90 tracking-wide drop-shadow-sm">
                   {event.tagline}
-                </p>
+                </p> */}
               </div>
 
               {/* Content */}
