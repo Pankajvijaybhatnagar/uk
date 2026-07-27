@@ -12,6 +12,10 @@ const NAV_LINKS = [
   { label: "Date", href: "/" },
 ];
 
+const WHATSAPP_NUMBER = "+447779159353"; // Replace with actual number in E.164 format without +
+const WHATSAPP_MESSAGE = "Hi! i would like to know about this festival ";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -66,10 +70,12 @@ export default function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href="#register"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer noopener"
             className="rounded-full bg-maroon px-6 py-2.5 font-body text-sm font-semibold text-cream shadow-gold transition-transform hover:-translate-y-0.5 hover:bg-maroon-light"
           >
-            Save Your Seat
+          Contact Us
           </a>
         </div>
 
@@ -105,11 +111,13 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="#register"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer noopener"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-maroon px-6 py-3 text-center font-body text-sm font-semibold text-cream"
             >
-              Save Your Seat
+          Contact Us
             </a>
           </nav>
         </div>
