@@ -189,7 +189,7 @@ export default function EventPage({ params }) {
                     rel="noopener noreferrer"
                     className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-7 py-3 font-script text-lg italic tracking-wide text-cream shadow-lg transition-transform hover:scale-[1.03]"
                   >
-                    Register Now
+                    Event Registration
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -313,7 +313,7 @@ export default function EventPage({ params }) {
                       rel="noopener noreferrer"
                       className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-6 py-2.5 font-script text-base italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02]"
                     >
-                      Book Coach Seat
+                      Book your Coach Seat
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -424,7 +424,7 @@ export default function EventPage({ params }) {
                   </>
                 )}
 
-                {hasRegistration && (
+                {/* {hasRegistration && (
                   <Link
                     href={event.registrationLink}
                     target="_blank"
@@ -438,7 +438,7 @@ export default function EventPage({ params }) {
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
-                )}
+                )} */}
 
                 {/* QR scanner — only if there's a registration link to encode */}
                 {hasRegistration && qrSrc && (
@@ -472,14 +472,14 @@ export default function EventPage({ params }) {
                         Coach seats — {event.coachTravel.suggestedDonation}
                       </p>
                     )}
-                    <Link
+                    {/* <Link
                       href={event.coachTravel.bookingLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-4 py-2 font-script text-sm italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02]"
                     >
                       Book Coach
-                    </Link>
+                    </Link> */}
                   </div>
                 )}
               </div>
