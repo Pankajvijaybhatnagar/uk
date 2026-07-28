@@ -27,7 +27,7 @@ export default function Venue() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-xl border border-gold/30 bg-cream-panel p-5">
               <p className="font-display text-lg font-semibold text-maroon-dark">When</p>
-              <p className="mt-1 font-body text-sm text-ink/70">25 – 30 August 2026</p>
+              <p className="mt-1 font-body text-sm text-ink/70">22 – 30 August 2026</p>
             </div>
             <div className="rounded-xl border border-gold/30 bg-cream-panel p-5">
               <p className="font-display text-lg font-semibold text-maroon-dark">Where</p>
