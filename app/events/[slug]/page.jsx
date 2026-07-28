@@ -3,14 +3,13 @@
 // ONE page template shared by every event. Next.js calls this once per slug
 // (see generateStaticParams below) — only the data from lib/event-data.js changes.
 //
-// UPDATED: hero shows a SQUARE creative image (1080x1080) as a framed card.
-// UPDATED: added optional sections — Programme, Coach Travel, Venue Information,
-// FAQs, and Closing Message — all driven by optional fields on the event object.
-// UPDATED: every field that isn't guaranteed to exist on every event (registrationLink,
-// heroImage, shortDesc, body, highlights, date/time/venue, gallery, etc.) is now
-// individually guarded, so missing content simply doesn't render — no empty
-// headings, no broken buttons/links, no blank boxes. No new CSS was introduced;
-// everything reuses the design tokens already established in this file.
+// Every field that isn't guaranteed to exist on every event is individually
+// guarded, so missing content simply doesn't render — no empty headings,
+// no empty boxes, no broken links. This version adds coverage for fields
+// that exist in the data but weren't rendered before: itinerary + itineraryNote,
+// specialTribute, expectations (fallback for highlights), programmeNote,
+// coachTravel.departureTime, coachBookingLink (event-level fallback), and
+// fixes venueInformation (it's a string in the data, not an array).
 
 import Image from "next/image";
 import Link from "next/link";
@@ -67,6 +66,48 @@ export default function EventPage({ params }) {
     : null;
 
   const hasDetails = Boolean(event.date || event.time || event.venue);
+
+  // coachTravel objects can exist but have every field blank (e.g. Coventry) —
+  // only render the section if at least one real value is present.
+  const hasCoachTravel = Boolean(
+    event.coachTravel &&
+      (event.coachTravel.title ||
+        event.coachTravel.description ||
+        event.coachTravel.departure ||
+        event.coachTravel.departureTime ||
+        event.coachTravel.return ||
+        event.coachTravel.suggestedDonation ||
+        event.coachTravel.note ||
+        event.coachTravel.bookingLink)
+  );
+
+  // Fall back to the event-level coachBookingLink (used on some events) if
+  // coachTravel itself doesn't carry its own bookingLink.
+  const coachBookingLink =
+    event.coachTravel?.bookingLink || event.coachBookingLink || "";
+
+  const hasSpecialTribute = Boolean(
+    event.specialTribute &&
+      (event.specialTribute.title ||
+        event.specialTribute.description ||
+        event.specialTribute.body)
+  );
+
+  // "highlights" and "expectations" serve the same purpose ("What to Expect") —
+  // different events use different keys. Prefer highlights, fall back to expectations.
+  const expectList =
+    event.highlights?.length > 0
+      ? event.highlights
+      : event.expectations?.length > 0
+      ? event.expectations
+      : null;
+
+  // venueInformation is a plain string in the data, not an array.
+  const venueInfoParagraphs = Array.isArray(event.venueInformation)
+    ? event.venueInformation
+    : event.venueInformation
+    ? [event.venueInformation]
+    : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -125,7 +166,6 @@ export default function EventPage({ params }) {
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-             
             </Link>
 
             <div
@@ -205,12 +245,6 @@ export default function EventPage({ params }) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_340px]">
             {/* Main content */}
             <div>
-              {/* {event.shortDesc && (
-                <p className="font-body text-lg leading-relaxed text-ink/80 md:text-xl">
-                  {event.shortDesc}
-                </p>
-              )} */}
-
               {event.body?.length > 0 && (
                 <div className="mt-8 space-y-5">
                   {event.body.map((para, i) => (
@@ -221,20 +255,41 @@ export default function EventPage({ params }) {
                 </div>
               )}
 
-              {/* Highlights */}
-              {event.highlights?.length > 0 && (
+              {/* What to Expect — from highlights, or expectations as a fallback */}
+              {expectList && (
                 <div className="mt-10 rounded-2xl border border-gold/30 bg-cream-panel p-7">
                   <h2 className="font-display text-xl font-semibold text-indigo-deep">
                     What to Expect
                   </h2>
                   <ul className="mt-4 space-y-3">
-                    {event.highlights.map((h, i) => (
+                    {expectList.map((h, i) => (
                       <li key={i} className="flex items-start gap-3 font-body text-sm text-ink/70">
                         <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-saffron" />
                         {h}
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Special Tribute */}
+              {hasSpecialTribute && (
+                <div className="mt-10 rounded-2xl border-2 border-gold/50 bg-cream-panel p-7">
+                  {event.specialTribute.title && (
+                    <h2 className="font-display text-xl font-semibold text-indigo-deep">
+                      {event.specialTribute.title}
+                    </h2>
+                  )}
+                  {event.specialTribute.description && (
+                    <p className="mt-3 font-body text-sm leading-relaxed text-ink/70">
+                      {event.specialTribute.description}
+                    </p>
+                  )}
+                  {event.specialTribute.body && (
+                    <p className="mt-3 font-body text-sm leading-relaxed text-ink/70">
+                      {event.specialTribute.body}
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -261,11 +316,47 @@ export default function EventPage({ params }) {
                       </div>
                     ))}
                   </div>
+                  {event.programmeNote && (
+                    <p className="mt-4 font-body text-xs italic text-ink/50">
+                      {event.programmeNote}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Itinerary — distinct from Programme; used for day-trip style events */}
+              {event.itinerary?.length > 0 && (
+                <div className="mt-10 rounded-2xl border border-gold/30 bg-cream-panel p-7">
+                  <h2 className="font-display text-xl font-semibold text-indigo-deep">
+                    Itinerary
+                  </h2>
+                  <div className="mt-4 space-y-4">
+                    {event.itinerary.map((item, i) => (
+                      <div
+                        key={i}
+                        className="flex flex-col gap-1 border-b border-gold/20 pb-3 last:border-b-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-4"
+                      >
+                        {item.time && (
+                          <span className="flex-shrink-0 font-body text-xs font-semibold uppercase tracking-wide text-maroon sm:w-40">
+                            {item.time}
+                          </span>
+                        )}
+                        {item.title && (
+                          <span className="font-body text-sm text-ink/70">{item.title}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {event.itineraryNote && (
+                    <p className="mt-4 font-body text-xs italic text-ink/50">
+                      {event.itineraryNote}
+                    </p>
+                  )}
                 </div>
               )}
 
               {/* Coach Travel */}
-              {event.coachTravel && (
+              {hasCoachTravel && (
                 <div className="mt-10 rounded-2xl border-2 border-gold/50 bg-cream-panel p-7">
                   {event.coachTravel.title && (
                     <h2 className="font-display text-xl font-semibold text-indigo-deep">
@@ -278,40 +369,48 @@ export default function EventPage({ params }) {
                     </p>
                   )}
                   {(event.coachTravel.departure ||
+                    event.coachTravel.departureTime ||
                     event.coachTravel.return ||
                     event.coachTravel.suggestedDonation) && (
                     <dl className="mt-5 space-y-3 font-body text-sm text-ink/70">
                       {event.coachTravel.departure && (
                         <div className="flex gap-3">
-                          <dt className="w-28 flex-shrink-0 font-semibold text-maroon">Departure</dt>
+                          <dt className="w-32 flex-shrink-0 font-semibold text-maroon">Departure</dt>
                           <dd>{event.coachTravel.departure}</dd>
+                        </div>
+                      )}
+                      {event.coachTravel.departureTime && (
+                        <div className="flex gap-3">
+                          <dt className="w-32 flex-shrink-0 font-semibold text-maroon">Departure Time</dt>
+                          <dd>{event.coachTravel.departureTime}</dd>
                         </div>
                       )}
                       {event.coachTravel.return && (
                         <div className="flex gap-3">
-                          <dt className="w-28 flex-shrink-0 font-semibold text-maroon">Return</dt>
+                          <dt className="w-32 flex-shrink-0 font-semibold text-maroon">Return</dt>
                           <dd>{event.coachTravel.return}</dd>
                         </div>
                       )}
                       {event.coachTravel.suggestedDonation && (
                         <div className="flex gap-3">
-                          <dt className="w-28 flex-shrink-0 font-semibold text-maroon">Donation</dt>
+                          <dt className="w-32 flex-shrink-0 font-semibold text-maroon">Donation</dt>
                           <dd>{event.coachTravel.suggestedDonation}</dd>
                         </div>
                       )}
                     </dl>
                   )}
                   {event.coachTravel.note && (
-                    <p className="mt-4 font-body text-s italic text-ink/50">
+                    <p className="mt-4 font-body text-sm italic text-ink/50">
                       {event.coachTravel.note}
                     </p>
                   )}
-                  {event.coachTravel.bookingLink && (
-                    <Link style={{"fontSize":"1.5rem"}}
-                      href={event.coachTravel.bookingLink}
+                  {coachBookingLink && (
+                    <Link
+                      href={coachBookingLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-6 py-2.5 font-script text-base italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02] "
+                      style={{ fontSize: "1.5rem" }}
+                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-6 py-2.5 font-script text-base italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02]"
                     >
                       Book your Coach Seat
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -344,19 +443,19 @@ export default function EventPage({ params }) {
                 </div>
               )}
 
-              {/* Venue Information */}
-              {event.venueInformation?.length > 0 && (
+              {/* Venue Information (plain string in the data) */}
+              {venueInfoParagraphs.length > 0 && (
                 <div className="mt-10">
                   <h2 className="font-display text-xl font-semibold text-indigo-deep">
                     Venue Information
                   </h2>
-                  {/* <div className="mt-4 space-y-3">
-                    {event.venueInformation.map((para, i) => (
+                  <div className="mt-4 space-y-3">
+                    {venueInfoParagraphs.map((para, i) => (
                       <p key={i} className="font-body text-sm leading-relaxed text-ink/70">
                         {para}
                       </p>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
               )}
 
@@ -385,8 +484,8 @@ export default function EventPage({ params }) {
 
               {/* Closing Message */}
               {event.closingMessage && (
-                <div  className="mt-12 rounded-2xl border border-gold/30 bg-cream-panel p-8 text-center">
-                  <p  style={{ fontSize: "1.7rem" }}   className="font-script text-xl italic leading-relaxed text-maroon">
+                <div className="mt-12 rounded-2xl border border-gold/30 bg-cream-panel p-8 text-center">
+                  <p style={{ fontSize: "1.7rem" }} className="font-script text-xl italic leading-relaxed text-maroon">
                     {event.closingMessage}
                   </p>
                 </div>
@@ -424,22 +523,6 @@ export default function EventPage({ params }) {
                   </>
                 )}
 
-                {/* {hasRegistration && (
-                  <Link
-                    href={event.registrationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-5 py-3 font-script text-lg italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02] ${
-                      hasDetails ? "mt-6" : ""
-                    }`}
-                  >
-                    Register Now
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </Link>
-                )} */}
-
                 {/* QR scanner — only if there's a registration link to encode */}
                 {hasRegistration && qrSrc && (
                   <div className="mt-6 flex flex-col items-center rounded-xl border border-gold/30 bg-cream p-4 text-center">
@@ -462,9 +545,9 @@ export default function EventPage({ params }) {
                 )}
 
                 {/* Coach travel quick link in sidebar too, if applicable */}
-                {event.coachTravel?.bookingLink && (
-                  <div  className="mt-6 rounded-xl border border-gold/30 bg-cream p-4 text-center">
-                    <p style={{ "fontSize": '1.5rem' }} className="font-script text-base italic text-maroon">
+                {hasCoachTravel && coachBookingLink && (
+                  <div className="mt-6 rounded-xl border border-gold/30 bg-cream p-4 text-center">
+                    <p style={{ fontSize: "1.5rem" }} className="font-script text-base italic text-maroon">
                       Travelling from Manchester?
                     </p>
                     {event.coachTravel.suggestedDonation && (
@@ -472,14 +555,6 @@ export default function EventPage({ params }) {
                         Coach seats — {event.coachTravel.suggestedDonation}
                       </p>
                     )}
-                    {/* <Link
-                      href={event.coachTravel.bookingLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-4 py-2 font-script text-sm italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02]"
-                    >
-                      Book Coach
-                    </Link> */}
                   </div>
                 )}
               </div>
