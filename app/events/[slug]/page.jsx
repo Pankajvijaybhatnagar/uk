@@ -307,7 +307,7 @@ export default function EventPage({ params }) {
                     </p>
                   )}
                   {event.coachTravel.bookingLink && (
-                    <Link
+                    <Link style={{"fontSize":"1.5rem"}}
                       href={event.coachTravel.bookingLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -463,8 +463,8 @@ export default function EventPage({ params }) {
 
                 {/* Coach travel quick link in sidebar too, if applicable */}
                 {event.coachTravel?.bookingLink && (
-                  <div className="mt-6 rounded-xl border border-gold/30 bg-cream p-4 text-center">
-                    <p className="font-script text-base italic text-maroon">
+                  <div  className="mt-6 rounded-xl border border-gold/30 bg-cream p-4 text-center">
+                    <p style={{ "fontSize": '1.5rem' }} className="font-script text-base italic text-maroon">
                       Travelling from Manchester?
                     </p>
                     {event.coachTravel.suggestedDonation && (
