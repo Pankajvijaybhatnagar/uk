@@ -385,8 +385,8 @@ export default function EventPage({ params }) {
 
               {/* Closing Message */}
               {event.closingMessage && (
-                <div className="mt-12 rounded-2xl border border-gold/30 bg-cream-panel p-8 text-center">
-                  <p className="font-script text-xl italic leading-relaxed text-maroon">
+                <div  className="mt-12 rounded-2xl border border-gold/30 bg-cream-panel p-8 text-center">
+                  <p  style={{ fontSize: "1.7rem" }}   className="font-script text-xl italic leading-relaxed text-maroon">
                     {event.closingMessage}
                   </p>
                 </div>
