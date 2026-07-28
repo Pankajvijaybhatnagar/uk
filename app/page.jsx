@@ -18,7 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <ProgramHighlights />
-        <Conventary/>
+        {/* <Conventary/> */}
         <EventGallery/>
         <GuideProfile />
         {/* <Schedule /> */}

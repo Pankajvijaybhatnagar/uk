@@ -157,7 +157,7 @@ function HeroIllustration() {
     //   </text>
     // </svg>
     <img
-      src="/a.jpeg"
+      src="/d.jpeg"
       alt="Manchester skyline blending into a temple silhouette beneath a rising sun"
       className="w-full rounded-[2rem] object-cover"
     />
