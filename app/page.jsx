@@ -8,6 +8,7 @@ import Venue from "@/components/Venue";
 import Registration from "@/components/Registration";
 import Footer from "@/components/Footer";
 import EventGallery from "@/components/Events";
+import Conventary from "@/components/Conventary";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <ProgramHighlights />
+        <Conventary/>
         <EventGallery/>
         <GuideProfile />
         {/* <Schedule /> */}
