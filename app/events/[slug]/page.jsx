@@ -302,7 +302,7 @@ export default function EventPage({ params }) {
                     </dl>
                   )}
                   {event.coachTravel.note && (
-                    <p className="mt-4 font-body text-xs italic text-ink/50">
+                    <p className="mt-4 font-body text-s italic text-ink/50">
                       {event.coachTravel.note}
                     </p>
                   )}
@@ -311,7 +311,7 @@ export default function EventPage({ params }) {
                       href={event.coachTravel.bookingLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-6 py-2.5 font-script text-base italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02]"
+                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-dark px-6 py-2.5 font-script text-base italic tracking-wide text-cream shadow-sm transition-transform hover:scale-[1.02] "
                     >
                       Book your Coach Seat
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
