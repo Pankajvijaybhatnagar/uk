@@ -1,10 +1,10 @@
 const FOOTER_LINKS = [
   { label: "About", href: "#about" },
-  { label: "Program", href: "#program" },
-  { label: "Guide", href: "#guide" },
+  { label: "Liverpool", href: "/events/liverpool-satsang-evening" },
+  { label: "Manchester", href: "/events/manchester-gita-festival" },
   // { label: "Schedule", href: "#schedule" },
-  { label: "Venue", href: "#venue" },
-  { label: "Date", href: "#register" },
+  { label: "Bradford", href: "/events/yorkshire-gita-festival" },
+  { label: "London", href: "/events/london-shri-krishna-janmashtami-shobha-yatra" },
 ];
 
 export default function Footer() {

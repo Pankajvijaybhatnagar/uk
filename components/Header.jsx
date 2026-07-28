@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/" },
-  { label: "Program", href: "/" },
-  { label: "Guide", href: "/" },
+  { label: "Liverpool", href: "/events/liverpool-satsang-evening" },
+  { label: "Manchester", href: "/events/manchester-gita-festival" },
   // { label: "Schedule", href: "#schedule" },
-  { label: "Venue", href: "/" },
-  { label: "Date", href: "/" },
+  { label: "Bradford", href: "/events/yorkshire-gita-festival" },
+  { label: "London", href: "/events/london-shri-krishna-janmashtami-shobha-yatra" },
 ];
 
 const WHATSAPP_NUMBER = "+447779159353"; // Replace with actual number in E.164 format without +
