@@ -43,11 +43,11 @@ export default function Hero() {
             <div className="flex items-center gap-3 rounded-2xl border border-gold/50 bg-cream-panel px-5 py-3 shadow-gold">
               <div className="flex h-11 w-11 flex-col items-center justify-center rounded-lg bg-maroon-gradient text-cream">
                 <span className="text-[10px] font-semibold uppercase leading-none">Aug</span>
-                <span className="font-display text-lg font-bold leading-none">25</span>
+                <span className="font-display text-lg font-bold leading-none">22</span>
               </div>
               <div className="leading-tight">
                 <p className="font-body text-sm font-semibold text-indigo-deep">
-                  25 – 30 August 2026
+                  22 – 30 August 2026
                 </p>
                 <p className="font-body text-xs text-ink/60">Manchester, United Kingdom</p>
               </div>
