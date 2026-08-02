@@ -2,9 +2,9 @@ import DiyaDivider from "./DiyaDivider";
 
 const SCHEDULE = [
   {
-    name: "Bhajans",
-    time: "6:30 PM",
-    desc: "The evening opens with devotional bhajans, filling the hall with melody and heartfelt devotion.",
+    name: "Gita Yagya",
+    time: "8:00 AM",
+    desc: "Each morning begins with the sacred Gita Yagya, a Vedic fire ceremony offered in devotion and remembrance.",
     color: "from-maroon to-maroon-dark",
     icon: (
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -18,26 +18,14 @@ const SCHEDULE = [
     ),
   },
   {
-    name: "Discourse",
-    time: "7:00 PM",
-    desc: "A spiritual discourse exploring the Gita's timeless wisdom and its relevance to daily life.",
+    name: "Breakfast",
+    time: "After Yagya",
+    desc: "Following the Yagya, devotees are warmly invited to join together for breakfast in a spirit of fellowship.",
     color: "from-saffron to-[#B5501A]",
     icon: (
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <rect x="4" y="6" width="18" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
         <path d="M9 20h8M13 18v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: "Priti Bhojan",
-    time: "8:30 PM",
-    desc: "The evening concludes with Priti Bhojan — a shared meal in the spirit of fellowship and grace.",
-    color: "from-[#2E5266] to-[#1E3A47]",
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-        <circle cx="13" cy="13" r="9" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M13 8v5l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -51,16 +39,17 @@ export default function ProgramHighlights() {
           {/* LEFT: Content */}
           <div>
             <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-saffron">
-              Gita Festival Coventry
+              Gita Festival
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold leading-tight text-indigo-deep md:text-5xl">
-              Saturday{" "}
-              <span className="text-maroon">22nd August 2026</span>
+              Gita Yagya{" "}
+              <span className="text-maroon">25th – 29th August 2026</span>
             </h2>
 
             <p className="mt-4 font-body text-base leading-relaxed text-ink/70 md:text-lg">
-              Join us for an evening of devotion, wisdom, and fellowship as we
-              come together to celebrate the timeless message of the Bhagavad Gita.
+              Join us each morning for the sacred Gita Yagya, a Vedic fire
+              ceremony held daily at 8am, followed by breakfast in the spirit
+              of fellowship and devotion.
             </p>
 
             <div className="mt-5 flex items-start gap-3 rounded-2xl border border-gold/30 bg-cream-panel px-5 py-4 shadow-sm">
@@ -79,7 +68,8 @@ export default function ProgramHighlights() {
                 <circle cx="11" cy="8.4" r="2.4" stroke="currentColor" strokeWidth="1.6" />
               </svg>
               <p className="font-body text-sm leading-relaxed text-ink/75 md:text-base">
-                380 Stoney Stanton Rd, Coventry, CV6 5DJ, England
+                For information on daily location, please contact Aneet Kapoor
+                at +44 7779 159353.
               </p>
             </div>
 
@@ -119,8 +109,8 @@ export default function ProgramHighlights() {
             <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-cream-panel p-3 shadow-gold">
               <div className="overflow-hidden rounded-2xl">
                 <img
-                  src="22aug.jpeg"
-                  alt="Gita Festival Coventry"
+                  src="gita-yagya.jpeg"
+                  alt="Gita Yagya"
                   className="aspect-[1/1] w-full object-cover"
                 />
               </div>
